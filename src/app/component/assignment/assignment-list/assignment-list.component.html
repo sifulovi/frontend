@@ -1,0 +1,59 @@
+<div>
+
+
+  <button nz-button nzType="primary" (click)='showModal()'>Create a Assignment</button>
+
+  <div class="assignment-content  uk-child-width-1-3@m uk-child-width-1-2@s" uk-grid>
+    <div *ngFor=" let assignment of assignmentList">
+      <div class="uk-card uk-card-default">
+        <div class="inner-box">
+          <nz-card style="" [nzBordered]="false" nzTitle="{{assignment?.assignmentTitle}}" [nzExtra]="extraTemplate">
+            <div style=" text-align: center; object-fit: cover;">
+              <img
+                nz-image
+                width="50%"
+                height="50%"
+                nzSrc="{{assignment?.subjectImageUrl}}"
+                alt=""
+              />
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center">
+              <div></div>
+              <div>
+                <div style="text-align: center; margin-top: 10px;">
+                  <h5>{{ assignment?.date | date:'short' }}   </h5>
+
+                </div>
+                <div style="text-align: center; margin-top: 10px;">
+                  <h5>{{assignment?.student}}</h5>
+                </div>
+              </div>
+              <div>
+                <!--            <button nz-button nzBlock>Rendu</button>-->
+                <button [disabled]="assignment?.isComplete" (click)="showModalForComplete(assignment?._id)" nz-button nzType="default"
+                        nzBlock>{{assignment?.isComplete === false ? "Is Not Complete" : "Complete"}}</button>
+
+              </div>
+            </div>
+
+          </nz-card>
+
+          <ng-template #extraTemplate>
+            <nz-avatar nzSize="large" nzIcon="user"
+                       [nzSrc]="assignment?.teacherImageUrl"></nz-avatar>
+          </ng-template>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <app-assignemnt-marking *ngIf='isShowModalForComplete' (modalEmitter)='isShowModalForComplete=$event'
+                          [assignmentId]='assignmentId'
+                          [isShowModal]="isShowModalForComplete"></app-assignemnt-marking>
+
+
+  <app-create-assignment *ngIf='isShowModalForCreate' (modalEmitter)='isShowModalForCreate=$event'
+                         [isShowModal]="isShowModalForCreate"></app-create-assignment>
+
+</div>

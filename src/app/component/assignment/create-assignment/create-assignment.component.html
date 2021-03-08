@@ -1,0 +1,79 @@
+<nz-modal [(nzVisible)]="isShowModal" nzTitle="Create a assignment" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="validateForm" class="login-form">
+
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzRequired>Select Date</nz-form-label>
+
+        <nz-date-picker [(ngModel)]="date" [ngModelOptions]="{standalone: true}"
+                        (ngModelChange)="onChange($event)"></nz-date-picker>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input assignment name">
+          <nz-input-group>
+            <input type="text" nz-input formControlName="assignmentTitle" placeholder="Assignment name"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please Select Student">
+          <nz-select formControlName="student" nzShowSearch nzAllowClear nzPlaceHolder="Select a Student">
+            <nz-option *ngFor="let name of studentList" nzLabel="{{name?.name}}" nzValue="{{name?.name}}"></nz-option>
+
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please Select Subject">
+          <nz-select (ngModelChange)="onChangeSubject($event)" formControlName="subject" nzShowSearch nzAllowClear
+                     nzPlaceHolder="Select a Subject">
+            <nz-option *ngFor="let name of subjectList" nzLabel="{{name?.subjectName}}" nzValue="{{name?.subjectName}}"></nz-option>
+
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzRequired>Subject Image</nz-form-label>
+        <ng-container>
+          <img src='{{subjectImage}}' height="150" width="200px" style="margin: 3px;"> <br/>
+        </ng-container>
+
+
+      </nz-form-item>
+
+
+      <!--teacher-->
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please Select Teacher">
+          <input  readonly type="text" [(ngModel)]="teacherName" nz-input formControlName="teacherName" placeholder="Teacher name" />
+
+        </nz-form-control>
+      </nz-form-item>
+
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzRequired>Teacher Image</nz-form-label>
+        <ng-container>
+          <img [src]='teacherImage' height="150" width="200px" style="margin: 3px;"> <br/>
+        </ng-container>
+
+
+      </nz-form-item>
+    </form>
+
+  </ng-container>
+
+  <div *nzModalFooter>
+    <button nz-button (click)="submitForm()" class="login-form-button login-form-margin" [nzType]="'primary'">
+      Create a Assignment
+    </button>
+  </div>
+
+</nz-modal>

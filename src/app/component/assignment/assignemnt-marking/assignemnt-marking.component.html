@@ -1,0 +1,27 @@
+<nz-modal [(nzVisible)]="isShowModal" nzTitle="Mark a assignment" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input assignment name">
+<!--          <nz-input-group nzPrefixIcon="user">-->
+            <nz-input-number [(ngModel)]="assignment.assignmentMark" formControlName="assignmentMark" [nzMin]="1" [nzMax]="20" [nzStep]="1"></nz-input-number>
+<!--            <input type="text" nz-input [(ngModel)]="assignment.assignmentMark" formControlName="assignmentMark"/>-->
+<!--          </nz-input-group>-->
+        </nz-form-control>
+      </nz-form-item>
+       <nz-form-item>
+        <nz-form-control nzErrorTip="Please input assignment Remark">
+          <nz-input-group nzPrefixIcon="user">
+            <input type="text" nz-input [(ngModel)]="assignment.remark" formControlName="remark" placeholder="Assignment Remark"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+    </form>
+  </ng-container>
+  <div *nzModalFooter>
+    <button nz-button (click)="submitForm()" class="login-form-button login-form-margin" [nzType]="'primary'">
+      Mark Assignment
+    </button>
+  </div>
+</nz-modal>

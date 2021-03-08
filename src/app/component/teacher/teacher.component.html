@@ -1,0 +1,20 @@
+<button nz-button nzType="primary" (click)="showModal()">Create a Teacher</button>
+<app-create-teacher *ngIf='isShowModalForCreate' (modalEmitter)='isShowModalForCreate=$event'
+                    [isShowModal]="isShowModalForCreate"></app-create-teacher>
+
+
+<table class="uk-table uk-table-divider">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>image</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let teacher of teacherList ">
+    <td>{{teacher?.teacherName}}</td>
+    <td>{{teacher?.imageUrl}}</td>
+  </tr>
+
+  </tbody>
+</table>

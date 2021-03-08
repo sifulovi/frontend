@@ -1,0 +1,37 @@
+<nz-modal [(nzVisible)]="isShowModal" nzTitle="Create a assignment" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="validateForm" class="login-form">
+
+
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input assignment name">
+          <nz-input-group>
+            <input type="text" nz-input formControlName="teacherName" placeholder="Teacher name"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzRequired> Image</nz-form-label>
+
+        <input
+          id="file1"
+          type="file"
+          class="form-control"
+          (change)="onFileChangedForAssignment($event)"
+        >
+        <br>
+
+      </nz-form-item>
+
+    </form>
+
+  </ng-container>
+
+  <div *nzModalFooter>
+    <button nz-button (click)="submitForm()" class="login-form-button login-form-margin" [nzType]="'primary'">
+      Create a Assignment
+    </button>
+  </div>
+
+</nz-modal>

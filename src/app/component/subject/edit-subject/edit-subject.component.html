@@ -1,0 +1,73 @@
+<nz-modal [(nzVisible)]="isShowModal" nzTitle="Create a Subject" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="validateForm" class="login-form">
+
+
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input subjectName name">
+          <nz-input-group>
+            <input type="text" [(ngModel)]="subject.subjectName" nz-input formControlName="subjectName" placeholder="Subject Name"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzRequired> Image</nz-form-label>
+
+        <input
+          id="file1"
+          type="file"
+          class="form-control"
+          (change)="onFileChangedForSubject($event)"
+        >
+        <br>
+
+
+        <ng-container>
+          <img src='{{subject.imageUrl}}' height="150" width="200px" style="margin: 3px;"> <br/>
+        </ng-container>
+
+      </nz-form-item>
+
+
+
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input teacher Name">
+          <nz-input-group>
+            <input type="text"  [(ngModel)]="subject.teacherName" nz-input formControlName="teacherName" placeholder="Teacher Name"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzRequired> Image</nz-form-label>
+
+        <input
+          id="file"
+          type="file"
+          class="form-control"
+          (change)="onFileChangedForTeacher($event)"
+        >
+        <br>
+        <ng-container>
+          <img src='{{subject.teacherImageUrl}}' height="150" width="200px" style="margin: 3px;"> <br/>
+        </ng-container>
+
+      </nz-form-item>
+
+
+
+
+
+
+    </form>
+
+  </ng-container>
+
+  <div *nzModalFooter>
+    <button nz-button (click)="submitForm()" class="login-form-button login-form-margin" [nzType]="'primary'">
+      Create a Subject
+    </button>
+  </div>
+
+</nz-modal>

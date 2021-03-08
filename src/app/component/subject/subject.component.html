@@ -1,0 +1,37 @@
+<button nz-button nzType="primary" (click)="showModal()">Create a Subject</button>
+<app-create-subject *ngIf='isShowModalForCreate' (modalEmitter)='isShowModalForCreate=$event'
+                    [isShowModal]="isShowModalForCreate"></app-create-subject>
+<app-edit-subject *ngIf='isShowModalForUpdate' (modalEmitter)='isShowModalForUpdate=$event'
+                    [isShowModal]="isShowModalForUpdate"
+                  [subjectId]="subjectId"
+></app-edit-subject>
+
+
+<table class="uk-table uk-table-divider">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>image</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let subject of subjectName ">
+    <td>{{subject?.subjectName}}</td>
+    <td>{{subject?.imageUrl}}</td>
+    <td><a
+      nz-popconfirm
+      nzPopconfirmTitle="Are you sure delete this Subject?"
+      nzPopconfirmPlacement="bottom"
+      (nzOnConfirm)="deleteSubject(subject._id, subject)"
+      (nzOnCancel)="cancel()"
+    >Delete</a
+    >
+      &nbsp;
+      <a (click)="showModalForUpdate(subject?._id)">Edit</a>
+
+    </td>
+  </tr>
+
+  </tbody>
+</table>
